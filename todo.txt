@@ -8,9 +8,20 @@ x convert to picking berries
 x segment and its children die if hit wall
 x prevent unfinished parts of plants from hitting wall
 ---
+x cactus graphic
+x berry graphic
+x better segment transition
 - allow berries to spawn along inside of plant
 - have distance from center of plant affect pulling power?
 - figure out why plant can sometimes remain in wall
+- berries grow gradually?
+
+- find music
+- start button
+- restart button
+- tutorial
+- other obstacles
+- background
 
 ---
 obsolete:
