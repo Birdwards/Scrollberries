@@ -1,0 +1,17 @@
+x scroll!
+x click and drag berries
+x berries tilting plant
+x new segments growing from plant
+x smooth scrolling
+x randomly spawning berries
+x convert to picking berries
+- segment and its children die if hit wall
+- prevent unfinished parts of plants from hitting wall
+- allow berries to spawn along inside of plant
+- have distance from center of plant affect pulling power?
+
+---
+obsolete:
+
+- improve berry placement algo
+- prevent stalling by holding onto berry
