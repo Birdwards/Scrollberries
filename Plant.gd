@@ -11,14 +11,28 @@ var max_index = 1.0
 var child = null
 var parent = null
 
-#signal grow_berry
+var growth_box
+
 signal grow_plant
+
+func _ready():
+	$GrowthArea.collision_layer = 1
+	$GrowthArea.collision_mask = 1
+	collision_layer = 0
+	collision_mask = 0
+	growth_box = $GrowthArea.shape_owner_get_shape(0, 0)
 
 func _process(delta):
 	if length < 45:
 		length = min(length + GROW_SPEED*delta, 45)
 		$Line2D.set_point_position(1, Vector2.UP*length)
+		growth_box.height = length
+		$GrowthArea.position.y = -length*0.5
 		if length >= 45:
+			$GrowthArea.collision_layer = 0
+			$GrowthArea.collision_mask = 0
+			collision_layer = 1
+			collision_mask = 1
 			var new_plant = duplicate()
 			new_plant.get_node("Line2D").set_point_position(1, Vector2.ZERO)
 			new_plant.position = Vector2.UP * 45
@@ -30,15 +44,6 @@ func _process(delta):
 			emit_signal("grow_plant", new_plant)
 			$BerryTimer.wait_time = randf()*5+5
 			$BerryTimer.start()
-			#if index == 1:
-			#	var new_berry = Berry.instance()
-			#	new_berry.position = Vector2.UP * randf() * 45
-			#	if randf() < 0.5:
-			#		new_berry.position += Vector2.LEFT*22.5
-			#	else:
-			#		new_berry.position += Vector2.RIGHT*22.5
-			#	add_child(new_berry)
-			#	emit_signal("grow_berry", new_berry)
 	var berry_factor = 0
 	for c in get_children():
 		if c.is_in_group("berry"):
@@ -60,3 +65,16 @@ func _on_BerryTimer_timeout():
 	add_child(new_berry)
 	$BerryTimer.wait_time = (randf()+1)*5*max_index/index
 	$BerryTimer.start()
+
+
+func _on_Plant_area_entered(area):
+	if area.is_in_group("obstacle"):
+		set_max_index(index)
+		length = 0
+		if child != null:
+			child.queue_free()
+			child = null
+
+func _on_GrowthArea_area_entered(area):
+	_on_Plant_area_entered(area)
+		

@@ -5,10 +5,12 @@ x new segments growing from plant
 x smooth scrolling
 x randomly spawning berries
 x convert to picking berries
-- segment and its children die if hit wall
-- prevent unfinished parts of plants from hitting wall
+x segment and its children die if hit wall
+x prevent unfinished parts of plants from hitting wall
+---
 - allow berries to spawn along inside of plant
 - have distance from center of plant affect pulling power?
+- figure out why plant can sometimes remain in wall
 
 ---
 obsolete:
